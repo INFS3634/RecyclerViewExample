@@ -87,4 +87,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.MyViewHold
             });
         }
     }
+
+    public void setData(ArrayList<Course> courses) {
+        mCourses.clear();
+        mCourses.addAll(courses);
+        notifyDataSetChanged();
+    }
 }

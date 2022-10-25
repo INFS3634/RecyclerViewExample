@@ -1,6 +1,13 @@
 package au.edu.unsw.infs3634.recyclerview_example;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Course {
+    @PrimaryKey
+    @NonNull
     private String code;
     private String name;
 
@@ -8,6 +15,8 @@ public class Course {
         this.code = courseCode;
         this.name = courseName;
     }
+
+    public Course() {}
 
     public String getCode() {
         return code;
