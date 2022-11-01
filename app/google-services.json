@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877517177656",
+    "project_id": "recyclerviewinfs3634",
+    "storage_bucket": "recyclerviewinfs3634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877517177656:android:f4d4bf697c39687c0db7cd",
+        "android_client_info": {
+          "package_name": "au.edu.unsw.infs3634.recyclerview_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877517177656-bf3fa2rk4irv250ujt2lhssi9j4u4rdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxSV4Ypp7IDKkJhu8m0sGuX7NTfbgxUzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877517177656-bf3fa2rk4irv250ujt2lhssi9j4u4rdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
