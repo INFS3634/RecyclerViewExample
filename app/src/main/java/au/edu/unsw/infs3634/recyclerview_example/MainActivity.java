@@ -1,5 +1,6 @@
 package au.edu.unsw.infs3634.recyclerview_example;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,13 @@ import android.view.MenuInflater;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -23,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements CourseRecyclervie
     private List<Course> courseList = new ArrayList<>();
     private CourseAdapter adapter;
     private CourseDatabase mDb;
+    private FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +77,22 @@ public class MainActivity extends AppCompatActivity implements CourseRecyclervie
                     @Override
                     public void run() {
                         adapter.setData((ArrayList<Course>) courseList);
+                        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                        DatabaseReference reference = firebaseDatabase.getReference(FirebaseAuth.getInstance().getUid());
+                        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                String result = (String) snapshot.getValue();
+                                if(result != null) {
+                                    Toast.makeText(MainActivity.this, "Your saved course is: " + courseList.get(Integer.valueOf(result)).getName(), Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
                     }
                 });
                 Log.d("MainActivity", "Line 73");
@@ -79,7 +104,10 @@ public class MainActivity extends AppCompatActivity implements CourseRecyclervie
     @Override
     public void onCourseClick(int position) {
         Course course = courseList.get(position);
-        Toast.makeText(this, course.getName(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, course.getName() + " selected!", Toast.LENGTH_SHORT).show();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference(FirebaseAuth.getInstance().getUid());
+        reference.setValue(course.getCode());
     }
 
     @Override
